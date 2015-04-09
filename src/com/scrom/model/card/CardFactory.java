@@ -1,7 +1,7 @@
 package com.scrom.model.card;
 
+import com.scrom.model.card.asset.AssetCard;
 import com.scrom.model.card.event.EventCard;
-import com.scrom.model.card.interfaces.Immediate;
 
 import java.util.ArrayList;
 
@@ -25,7 +25,14 @@ public class CardFactory {
     }
 
 
+    public static ArrayList<EventCard> getEventCards() {
+        return null;
+    }
+
+    public static ArrayList<AssetCard> getAssetCards() {
+        return null;
+    }
 }
-class SampleEventCard extends EventCard implements Immediate{
+class SampleEventCard extends EventCard{
 
 }

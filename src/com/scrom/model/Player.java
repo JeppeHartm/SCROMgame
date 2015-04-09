@@ -2,6 +2,7 @@ package com.scrom.model;
 
 import com.scrom.model.card.Card;
 import com.scrom.model.card.asset.AssetCard;
+import com.scrom.model.card.event.EventCard;
 
 import java.util.ArrayList;
 
@@ -32,4 +33,7 @@ public class Player {
         level = i;
     }
 
+    public void give(Card c) {
+        hand.add(c);
+    }
 }

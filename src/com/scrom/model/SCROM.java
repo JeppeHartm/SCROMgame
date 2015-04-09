@@ -1,10 +1,13 @@
 package com.scrom.model;
 
+import com.scrom.model.card.Card;
 import com.scrom.model.card.CardFactory;
 import com.scrom.model.card.event.EventCard;
 import com.scrom.model.card.asset.AssetCard;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Random;
 
 public class SCROM {
     int turnNumber = 0;
@@ -47,13 +50,13 @@ public class SCROM {
     }
     private void checkAssets(){
         if(assetCards.isEmpty()){
-            assetCards.addAll(shuffle(assetCardDiscards));
+            assetCards.addAll((ArrayList<AssetCard>)shuffle(assetCardDiscards));
             assetCardDiscards.clear();
         }
     }
     private void checkEvents(){
         if(eventCards.isEmpty()){
-            eventCards.addAll(shuffle(eventCardDiscards));
+            eventCards.addAll((ArrayList<EventCard>)shuffle(eventCardDiscards));
             eventCardDiscards.clear();
         }
     }
@@ -65,5 +68,13 @@ public class SCROM {
         if(!winners.isEmpty()){
             //do win stuff
         }
+    }
+    private ArrayList<? extends Card> shuffle(ArrayList<? extends Card> cards) {
+        Random r = new Random();
+        ArrayList<Card> output = new ArrayList<Card>();
+        while (!cards.isEmpty()){
+            output.add(cards.remove(r.nextInt(cards.size()-1)));
+        }
+        return output;
     }
 }
