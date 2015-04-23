@@ -17,13 +17,7 @@ public class SCROM {
     ArrayList<EventCard> eventCardDiscards;
     ArrayList<AssetCard> assetCards;
     ArrayList<AssetCard> assetCardDiscards;
-    private void gameLoop(){
-        pregame();
-        while(true){
-            preturn();
-            current = players.get(turnNumber%players.size());
-        }
-    }
+
     private void pregame(){
         initialize();
         dealCards();
