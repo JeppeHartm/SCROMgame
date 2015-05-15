@@ -15,7 +15,10 @@ public class Player {
     ArrayList<AssetCard> carried;
     ArrayList<Player> opponents;
     SCROM scrom;
-    public Player(SCROM s){
+    private final String ID;
+
+    public Player(SCROM s, String id){
+        ID = id;
         hand = new ArrayList<Card>();
         opponents = new ArrayList<Player>();
         scrom = s;
@@ -35,5 +38,19 @@ public class Player {
 
     public void give(Card c) {
         hand.add(c);
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void playCard(Card card) {
+        for(Card c : hand){
+            if(c == card){
+                hand.remove(c);
+                scrom.play(this,c);
+                return;
+            }
+        }
     }
 }

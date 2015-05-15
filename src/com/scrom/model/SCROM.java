@@ -71,4 +71,16 @@ public class SCROM {
         }
         return output;
     }
+
+    public Player getPlayer(String playerId) {
+        for(Player p : players){
+            if(p.getID() == playerId) return p;
+        }
+        return null;
+    }
+
+    public void play(Player p,Card c) {
+
+
+    }
 }
