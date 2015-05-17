@@ -5,6 +5,7 @@ import com.scrom.model.card.CardFactory;
 import com.scrom.model.card.event.EventCard;
 import com.scrom.model.card.asset.AssetCard;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
@@ -18,11 +19,11 @@ public class SCROM {
     ArrayList<AssetCard> assetCards;
     ArrayList<AssetCard> assetCardDiscards;
 
-    private void pregame(){
+    public void pregame(){
         initialize();
         dealCards();
     }
-    private void preturn(){
+    public void preturn(){
         checkWin();
         checkAssets();
         checkEvents();
@@ -80,7 +81,11 @@ public class SCROM {
     }
 
     public void play(Player p,Card c) {
-
+        if(c instanceof AssetCard){
+            c.apply(p);
+        }else if(c instanceof EventCard){
+            c.apply(current);
+        }
 
     }
 }
