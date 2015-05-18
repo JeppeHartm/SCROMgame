@@ -20,12 +20,14 @@ public class SCROM {
     ArrayList<EventCard> eventCardDiscards;
     ArrayList<AssetCard> assetCards;
     ArrayList<AssetCard> assetCardDiscards;
+    private GameState state;
 
     public void pregame(){
         initialize();
         dealCards();
     }
     public void preturn(){
+        state = GameState.waiting;
         checkWin();
         checkAssets();
         checkEvents();
@@ -64,7 +66,7 @@ public class SCROM {
             if(p.getLevel() >= 10)winners.add(p);
         }
         if(!winners.isEmpty()){
-            //do win stuff
+            state = GameState.complete;
         }
     }
     private ArrayList<? extends Card> shuffle(ArrayList<? extends Card> cards) {
@@ -94,4 +96,14 @@ public class SCROM {
         }
 
     }
+
+    public GameState getState() {
+        return state;
+    }
+
+    public Player getCurrent() {
+        return current;
+    }
+
+    public enum GameState {waiting,complete}
 }

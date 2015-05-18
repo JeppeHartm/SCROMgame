@@ -11,16 +11,20 @@ import java.util.ArrayList;
  */
 public class Player {
     private int level;
+    private int swiftness;
+    private int capacity;
+
     ArrayList<Card> hand;
-    ArrayList<AssetCard> carried;
+    ArrayList<Card> affecting;
     ArrayList<Player> opponents;
     SCROM scrom;
     private final String ID;
 
     public Player(SCROM s, String id){
         ID = id;
-        hand = new ArrayList<Card>();
-        opponents = new ArrayList<Player>();
+        hand = new ArrayList<>();
+        affecting = new ArrayList<>();
+        opponents = new ArrayList<>();
         scrom = s;
     }
     public void setOpponents(ArrayList<Player> players){
@@ -44,6 +48,21 @@ public class Player {
         return ID;
     }
 
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public int getSwiftness() {
+        return swiftness;
+    }
+
+    public void setSwiftness(int swiftness) {
+        this.swiftness = swiftness;
+    }
     public void playCard(Card card) {
         for(Card c : hand){
             if(c == card){
