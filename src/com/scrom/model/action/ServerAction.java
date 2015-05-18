@@ -1,14 +1,21 @@
 package com.scrom.model.action;
 
+import com.scrom.model.card.Card;
+
 /**
  * Created by jeppe on 09-04-15.
  */
 public class ServerAction extends ScromAction {
-    private int actionType;
+    public enum ActionType{CardPlayed,CardDealt}
+    private ActionType actionType;
 
-    public int getActionType() {
+    public ServerAction(String player_id,Card card) {
+        super(player_id, card);
+    }
+
+    public ActionType getActionType() {
         return actionType;
     }
 
-    public enum ActionType{CardPlayed,CardDealt}
+
 }
