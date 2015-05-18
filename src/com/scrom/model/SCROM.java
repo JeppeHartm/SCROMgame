@@ -2,6 +2,7 @@ package com.scrom.model;
 
 import com.scrom.model.card.Card;
 import com.scrom.model.card.CardFactory;
+import com.scrom.model.card.event.EncounterEventCard;
 import com.scrom.model.card.event.EventCard;
 import com.scrom.model.card.asset.AssetCard;
 
@@ -13,6 +14,7 @@ import java.util.Random;
 public class SCROM {
     int turnNumber = 0;
     Player current;
+    EventCard currentCard;
     ArrayList<Player> players;
     ArrayList<EventCard> eventCards;
     ArrayList<EventCard> eventCardDiscards;
@@ -28,6 +30,7 @@ public class SCROM {
         checkAssets();
         checkEvents();
         turnNumber++;
+        currentCard = eventCards.remove(0);
     }
     private void initialize(){
         eventCards = CardFactory.getEventCards();
@@ -78,6 +81,9 @@ public class SCROM {
             if(p.getID() == playerId) return p;
         }
         return null;
+    }
+    public void addPlayer(String name){
+        players.add(new Player(this,name));
     }
 
     public void play(Player p,Card c) {
