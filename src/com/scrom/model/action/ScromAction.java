@@ -9,18 +9,18 @@ import java.io.Serializable;
  */
 public abstract class ScromAction implements Serializable {
     private final String PLAYER_ID;
-    private final Card CARD;
+    private final Object SUBJECT;
 
-    protected ScromAction(String player_id, Card card) {
+    protected ScromAction(String player_id, Object sub) {
         PLAYER_ID = player_id;
-        CARD = card;
+        SUBJECT = sub;
     }
 
     public String getPlayerId() {
         return PLAYER_ID;
     }
 
-    public Card getCard() {
-        return CARD;
+    public Object getSubject() {
+        return SUBJECT;
     }
 }
