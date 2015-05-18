@@ -2,6 +2,7 @@ package com.scrom.model;
 
 import com.scrom.model.card.Card;
 import com.scrom.model.card.CardFactory;
+import com.scrom.model.card.event.EmergencyEventCard;
 import com.scrom.model.card.event.EncounterEventCard;
 import com.scrom.model.card.event.EventCard;
 import com.scrom.model.card.asset.AssetCard;
@@ -91,18 +92,53 @@ public class SCROM {
     public void play(Player p,Card c) {
         if(c instanceof AssetCard){
             c.apply(p);
+            assetCardDiscards.add((AssetCard)c);
         }else if(c instanceof EventCard){
             c.apply(current);
+            eventCardDiscards.add((EventCard)c);
         }
 
     }
-
+    public void resolve(){
+        EventCard ec = getCurrentCard();
+        if(ec instanceof EncounterEventCard){
+            EncounterEventCard eec = (EncounterEventCard) ec;
+            if(getCurrent().getLevel() > eec.getLevel()){
+                getCurrent().setLevel(getCurrent().getLevel()+1);
+            }else{
+                ec.apply(getCurrent());
+            }
+        }else if(ec instanceof EmergencyEventCard){
+            ec.apply(getCurrent());
+        }
+    }
     public GameState getState() {
         return state;
     }
 
     public Player getCurrent() {
         return current;
+    }
+
+    public EventCard getCurrentCard() {
+        return currentCard;
+    }
+
+    public void setCurrentCard(EventCard currentCard) {
+        if (this.currentCard != null) eventCardDiscards.add(this.currentCard);
+        this.currentCard = currentCard;
+    }
+
+    public void setCurrent(Player current) {
+        this.current = current;
+    }
+
+    public void incrementTurn() {
+        turnNumber++;
+    }
+
+    public void setGameState(GameState gameState) {
+        this.state = gameState;
     }
 
     public enum GameState {waiting,complete}

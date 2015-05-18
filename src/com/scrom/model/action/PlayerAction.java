@@ -6,7 +6,7 @@ import com.scrom.model.card.Card;
  * Created by jeppe on 09-04-15.
  */
 public class PlayerAction extends ScromAction {
-    public enum ActionType{CardPlayed}
+    public enum ActionType{Ready, CardPlayed}
     private final ActionType ACTION_TYPE;
 
     public ActionType getActionType() {
